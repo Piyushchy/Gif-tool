@@ -217,7 +217,7 @@ ov.addEventListener('pointermove',e=>{
  if(drawing){const l=pts[pts.length-1];if(Math.hypot(p[0]-l[0],p[1]-l[1])>2*k()){pts.push(p);overlay()}}
  else if(mode==='poly'&&!closed&&pts.length){hover=p;overlay()}
 });
-ov.addEventListener('pointerup',()=>{if(panning){panning=null;ov.style.cursor='grab';return}if(drawing){drawing=false;finish()}});
+ov.addEventListener('pointerup',()=>{if(panning){panning=null;ov.style.cursor='grab';return}if(drawing){drawing=false;const l=pts[pts.length-1];if(pts.length>2&&Math.hypot(l[0]-pts[0][0],l[1]-pts[0][1])<12*k())finish();else{ui();overlay()}}});
 ov.addEventListener('contextmenu',e=>{e.preventDefault();if(G)reset()});
 addEventListener('keydown',e=>{
  if(!G||closed||$('#pgCrop').classList.contains('hide'))return;
